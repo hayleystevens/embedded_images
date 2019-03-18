@@ -3,7 +3,7 @@
      <dashboard-extension id="com.example.extensions.name" extension-version="0.1.0">
        <default-locale>en_US</default-locale>
        <name resource-id="name"/>
-       <description>Embedded Image: The goal of this extension is to embedded images within a Tableau dashboard without using custom shapes.</description>
+       <description>The goal of this extension is to embedded images within a Tableau dashboard without using custom shapes.</description>
        <author name="Hayley Stevens" email="hayley.stevens@slalom.com" organization="Slalom" website="https://www.slalom.com"/>
        <min-api-version>1.0</min-api-version>
        <source-location>
@@ -15,9 +15,7 @@
      </dashboard-extension>
      <resources>
        <resource id="name">
-         <text locale="en_US">name in English</text>
-         <text locale="fr_BE">name in French</text>
-         <text locale="de_DE">name in German</text>
+         <text locale="en_US">Embedded Image</text>
        </resource>
      </resources>
    </manifest>
