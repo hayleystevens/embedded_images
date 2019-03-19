@@ -1,5 +1,5 @@
 # Embedded Image
-## The goal of this extension is to embedded images within a Tableau dashboard without using custom shapes.  
+## The goal of this extension is to embed images within a Tableau dashboard without using custom shapes.  
 
 There are a few issues adding images through custom shapes. 
   * Using Custom shapes to add images drastically decreases the image quality. 
