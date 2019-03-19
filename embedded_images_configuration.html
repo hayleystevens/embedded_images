@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+ <html>
+   <head>
+     <meta charset="utf-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+     <title>Configuration Pop-Up for Embdedded Images</title>`
+
+     <!-- jQuery -->
+     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+     <!-- Bootstrap -->
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+
+     <!-- Tableau Extensions API Library  -->
+     <script src="./tableau-extensions-1.latest.js"></script> 
+
+     <!-- Your JavaScript code that uses the Extensions API goes here -->
+     <script src="./embedded_images_configuration.js"></script>
+     </head>
+
+     <body>
+        <div class="container">
+          <h4>Embdedded Images</h4>
+          <p>
+            This Extension selects the worksheet and fields that are necessary to embed the images. 
+          </p>
+          <hr />
+    
+          <h5>Apply to these datasources/Select the worksheet that contains the image URL. </h5> <!-- Need to be edited-->
+          <h7>This worksheet should include the URL of the image that should be embdeed.  </h7> <!-- Need to be edited-->
+          <div style="margin-left: 14px" id="datasources">
+          </div>
+          <h5>Refresh interval in minutes:</h5> <!-- Need to be edited-->
+          <input style="margin-left: 14px" type="number" id="interval" name="quantity" min="1" max="60">
+    
+          <hr />
+          <button id="closeButton">Start Auto Refresh</button> <!-- Need to be edited. Can thi button be repalced... Does this cover standards..Look at standards...-->
+        </div>
+      </body>
+       </html>

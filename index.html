@@ -4,7 +4,7 @@
      <meta charset="utf-8">
      <meta http-equiv="X-UA-Compatible" content="IE=edge">
      <meta name="viewport" content="width=device-width, initial-scale=1">
-     <title>Hello Extensions</title>`
+     <title>Embdedded Images</title>`
 
      <!-- jQuery -->
      <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -14,19 +14,23 @@
      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 
      <!-- Tableau Extensions API Library  -->
-     <!-- library is in the /lib directory -->
      <script src="./tableau-extensions-1.latest.js"></script> 
 
      <!-- Your JavaScript code that uses the Extensions API goes here -->
      <script src="./embedded_images.js"></script>
      </head>
+
      <body>
-       <div class="container">
-         <div>
-           <h1>Hello Extensions!</h1>
-           <p id="resultBox" class="lead">Not Initialized</p>
-           <button id="initializeButton" class="btn btn-primary">Initialize Extensions API</button>
-         </div>
-       </div>
-     </body>
+      <div class="container">
+        <p id="mainContent">
+          <div id="active" style="display: none;">
+            Refreshing <b><span id="datasourceCount">0</span></b> datasource(s) every <b><span id="interval">5</span></b> minutes. This needs to be edited. 
+            <!--Replace with Worksheet Name and Field Name-->
+          </div>
+          <div id="inactive">
+            Please configure extension to embed images.
+          </div>
+        </p>
+      </div>
+    </body>
  </html>
