@@ -15,6 +15,8 @@
 
 // Wrap everything in an anonymous function to avoid polluting the global namespace
 (function () {
+  const defaultIntervalInMin = '5';
+  let refreshInterval;
   let activeWorksheetsIdList = [];
 
   $(document).ready(function () {
@@ -50,12 +52,15 @@
      * the popup extension.  In this example, the value '5' is passed, which will serve as the
      * default interval of refresh.
      */
-    tableau.extensions.ui.displayDialogAsync(popupUrl, { height: 500, width: 500 }).then((closePayload) => {
+    tableau.extensions.ui.displayDialogAsync(popupUrl, defaultIntervalInMin, { height: 500, width: 500 }).then((closePayload) => {
       // The promise is resolved when the dialog has been expectedly closed, meaning that
       // the popup extension has called tableau.extensions.ui.closeDialog.
       $('#inactive').hide();
       $('#active').show();
 
+      // The close payload is returned from the popup extension via the closeDialog method.
+      $('#interval').text(closePayload);
+      setupRefreshInterval(closePayload);
     }).catch((error) => {
       // One expected error condition is when the popup is closed by the user (meaning the user
       // clicks the 'X' in the top right of the dialog).  This can be checked for like so:
@@ -68,7 +73,29 @@
       }
     });
   }
-  
+
+  /**
+   * This function sets up a JavaScript interval based on the time interval selected
+   * by the user.  This interval will refresh all selected datasources.
+   */
+  function setupRefreshInterval(interval) {
+    refreshInterval = setInterval(function() { 
+      let dashboard = tableau.extensions.dashboardContent.dashboard;
+      dashboard.worksheets.forEach(function (worksheet) {
+        worksheet.getDataSourcesAsync().then(function (datasources) {
+          datasources.forEach(function (datasource) {
+             if (activeWorksheetsIdList.indexOf(datasource.id) >= 0) {
+               datasource.refreshAsync();
+             }
+          });
+        });
+      });
+    }, interval*60*1000);
+  }
+
+  /**
+   * Helper that is called to set state anytime the settings are changed.
+   */
   function updateExtensionBasedOnSettings(settings) {
     if (settings.selectedWorksheets) {
       activeWorksheetsIdList = JSON.parse(settings.selectedWorksheets);

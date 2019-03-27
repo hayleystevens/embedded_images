@@ -15,6 +15,10 @@
     // initializeDialogAsync instead of initializeAsync for initialization.
     // This has no affect on the development of the extension but is used internally.
     tableau.extensions.initializeDialogAsync().then(function (openPayload) {
+      // The openPayload sent from the parent extension in this sample is the 
+      // default time interval for the refreshes.  This could alternatively be stored
+      // in settings, but is used in this sample to demonstrate open and close payloads.
+      $('#interval').val(openPayload);
       $('#closeButton').click(closeDialog);
 
       let dashboard = tableau.extensions.dashboardContent.dashboard;
@@ -98,6 +102,7 @@
     tableau.extensions.settings.set(WorksheetSettingsKey, JSON.stringify(selectedWorksheets));
 
     tableau.extensions.settings.saveAsync().then((newSavedSettings) => {
-      });
+      tableau.extensions.ui.closeDialog($('#interval').val());
+    });
   }
 })();
