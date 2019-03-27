@@ -29,20 +29,16 @@
       // Loop through datasources in this sheet and create a checkbox UI 
       // element for each one.  The existing settings are used to 
       // determine whether a datasource is checked by default or not.
-      dashboard.worksheets.forEach(function (worksheet) {
-        worksheet.getDataSourcesAsync().then(function (datasources) {
-          datasources.forEach(function (datasource) {
+      worksheets.forEach(function (worksheet) {
             let isActive = (selectedWorksheets.indexOf(worksheet.id) >= 0);
 
             if (visibleWorksheets.indexOf(worksheet.id) < 0) {
-              addWorksheetItemToUI(datasource, isActive);
+              addWorksheetItemToUI(worksheet, isActive);
               visibleWorksheets.push(worksheet.id);
             }
           });
         });
       });
-    });
-  });
 
   /**
    * Helper that parses the settings from the settings namesapce and 
@@ -75,20 +71,20 @@
   /**
    * UI helper that adds a checkbox item to the UI for a datasource.
    */
-  function addWorksheetItemToUI(datasource, isActive) {
+  function addWorksheetItemToUI(worksheet, isActive) {
     let containerDiv = $('<div />');
 
     $('<input />', {
       type: 'checkbox', /**Want this to be a single select drop down */
       id: worksheet.id,
-      value: datasource.name,
+      value: worksheet.name,
       checked: isActive,
       click: function() {updateWorksheetList(worksheet.id) }
     }).appendTo(containerDiv);
 
     $('<label />', {
       'for': worksheet.id,
-      text: datasource.name,
+      text: worksheet.name,
     }).appendTo(containerDiv);
 
     $('#worksheets').append(containerDiv);
