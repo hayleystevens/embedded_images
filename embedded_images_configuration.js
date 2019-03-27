@@ -7,7 +7,7 @@
    * and stores this information in settings when the popup is closed.
    */
   const WorksheetSettingsKey = 'selectedWorksheets';
-  let selectedWorksheets = [];
+    let selectedWorksheets = [];
 
   $(document).ready(function () {
     // The only difference between an extension in a dashboard and an extension 
@@ -22,6 +22,7 @@
       $('#closeButton').click(closeDialog);
 
       let dashboard = tableau.extensions.dashboardContent.dashboard;
+      let worksheet = tableau.extensions.dashboardContent.dashboard.worksheets ;
       let visibleWorksheets = [];
       selectedWorksheets = parseSettingsForActiveWorksheets();
 
@@ -34,7 +35,7 @@
             let isActive = (selectedWorksheets.indexOf(datasource.id) >= 0);
 
             if (visibleWorksheets.indexOf(datasource.id) < 0) {
-              addDataSourceItemToUI(datasource, isActive);
+              addWorksheetItemToUI(datasource, isActive);
               visibleWorksheets.push(datasource.id);
             }
           });
@@ -74,11 +75,11 @@
   /**
    * UI helper that adds a checkbox item to the UI for a datasource.
    */
-  function addDataSourceItemToUI(datasource, isActive) {
+  function addWorksheetItemToUI(datasource, isActive) {
     let containerDiv = $('<div />');
 
     $('<input />', {
-      type: 'checkbox',
+      type: 'checkbox', /**Want this to be a single select drop down */
       id: datasource.id,
       value: datasource.name,
       checked: isActive,
@@ -90,7 +91,7 @@
       text: datasource.name,
     }).appendTo(containerDiv);
 
-    $('#datasources').append(containerDiv);
+    $('#worksheets').append(containerDiv);
   }
 
   /**
