@@ -84,7 +84,7 @@
       dashboard.worksheets.forEach(function (worksheet) {
         worksheet.getDataSourcesAsync().then(function (datasources) {
           datasources.forEach(function (datasource) {
-             if (activeWorksheetsIdList.indexOf(datasource.id) >= 0) {
+             if (activeWorksheetsIdList.indexOf(worksheet.id) >= 0) {
                datasource.refreshAsync();
              }
           });
