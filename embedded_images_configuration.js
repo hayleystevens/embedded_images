@@ -21,8 +21,7 @@
       $('#interval').val(openPayload);
       $('#closeButton').click(closeDialog);
 
-      let dashboard = tableau.extensions.dashboardContent.dashboard;
-      let worksheet = tableau.extensions.dashboardContent.dashboard.worksheets ;
+      let worksheets = tableau.extensions.dashboardContent.dashboard.worksheets ;
       let visibleWorksheets = [];
       selectedWorksheets = parseSettingsForActiveWorksheets();
 
