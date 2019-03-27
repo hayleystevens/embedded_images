@@ -68,9 +68,7 @@
       }
     });
   }
-
-   * Helper that is called to set state anytime the settings are changed.
-   */
+  
   function updateExtensionBasedOnSettings(settings) {
     if (settings.selectedWorksheets) {
       activeWorksheetsIdList = JSON.parse(settings.selectedWorksheets);
