@@ -29,7 +29,6 @@
       // element for each one.  The existing settings are used to 
       // determine whether a datasource is checked by default or not.
         dashboard.worksheets.forEach(function (worksheets) {
-          dashboard.worksheets.forEach(function (worksheets) {
             let isActive = (selectedWorksheets.indexOf(worksheet.id) >= 0);
 
             if (visibleWorksheets.indexOf(worksheet.id) < 0) {
@@ -39,7 +38,7 @@
           });
         });
       });
-    });
+ 
 
   /**
    * Helper that parses the settings from the settings namesapce and 
