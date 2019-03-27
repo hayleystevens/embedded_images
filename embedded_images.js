@@ -17,7 +17,7 @@
 (function () {
   const defaultIntervalInMin = '5';
   let refreshInterval;
-  let activeDatasourceIdList = [];
+  let activeWorksheetsIdList = [];
 
   $(document).ready(function () {
     // When initializing an extension, an optional object is passed that maps a special ID (which
@@ -84,7 +84,7 @@
       dashboard.worksheets.forEach(function (worksheet) {
         worksheet.getDataSourcesAsync().then(function (datasources) {
           datasources.forEach(function (datasource) {
-             if (activeDatasourceIdList.indexOf(datasource.id) >= 0) {
+             if (activeWorksheetsIdList.indexOf(datasource.id) >= 0) {
                datasource.refreshAsync();
              }
           });
@@ -97,9 +97,8 @@
    * Helper that is called to set state anytime the settings are changed.
    */
   function updateExtensionBasedOnSettings(settings) {
-    if (settings.selectedDatasources) {
-      activeDatasourceIdList = JSON.parse(settings.selectedDatasources);
-      $('#datasourceCount').text(activeDatasourceIdList.length);
-    }
+    if (settings.selectedWorksheets) {
+      activeWorksheetsIdList = JSON.parse(settings.selectedWorksheets);
+     }
   }
 })();

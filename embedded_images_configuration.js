@@ -3,11 +3,11 @@
 // Wrap everything in an anonymous function to avoid polluting the global namespace
 (function () {
   /**
-   * This extension collects the IDs of each datasource the user is interested in
+   * This extension collects the IDs of each workbook the user is interested in
    * and stores this information in settings when the popup is closed.
    */
-  const datasourcesSettingsKey = 'selectedDatasources';
-  let selectedDatasources = [];
+  const WorksheetSettingsKey = 'selectedWorksheets';
+  let selectedWorksheets = [];
 
   $(document).ready(function () {
     // The only difference between an extension in a dashboard and an extension 
@@ -22,8 +22,8 @@
       $('#closeButton').click(closeDialog);
 
       let dashboard = tableau.extensions.dashboardContent.dashboard;
-      let visibleDatasources = [];
-      selectedDatasources = parseSettingsForActiveDataSources();
+      let visibleWorksheets = [];
+      selectedWorksheets = parseSettingsForActiveWorksheets();
 
       // Loop through datasources in this sheet and create a checkbox UI 
       // element for each one.  The existing settings are used to 
@@ -31,11 +31,11 @@
       dashboard.worksheets.forEach(function (worksheet) {
         worksheet.getDataSourcesAsync().then(function (datasources) {
           datasources.forEach(function (datasource) {
-            let isActive = (selectedDatasources.indexOf(datasource.id) >= 0);
+            let isActive = (selectedWorksheets.indexOf(datasource.id) >= 0);
 
-            if (visibleDatasources.indexOf(datasource.id) < 0) {
+            if (visibleWorksheets.indexOf(datasource.id) < 0) {
               addDataSourceItemToUI(datasource, isActive);
-              visibleDatasources.push(datasource.id);
+              visibleWorksheets.push(datasource.id);
             }
           });
         });
@@ -48,26 +48,26 @@
    * returns a list of IDs of the datasources that were previously
    * selected by the user.
    */
-  function parseSettingsForActiveDataSources() {
-    let activeDatasourceIdList = [];
+  function parseSettingsForActiveWorksheets() {
+    let activeWorksheetsIdList = [];
     let settings = tableau.extensions.settings.getAll();
-    if (settings.selectedDatasources) {
-      activeDatasourceIdList = JSON.parse(settings.selectedDatasources);
+    if (settings.selectedWorksheets) {
+      activeWorksheetsIdList = JSON.parse(settings.selectedWorksheets);
     }
 
-    return activeDatasourceIdList;
+    return activeWorksheetsIdList;
   }
 
   /**
    * Helper that updates the internal storage of datasource IDs
    * any time a datasource checkbox item is toggled.
    */
-  function updateDatasourceList(id) {
-    let idIndex = selectedDatasources.indexOf(id);
+  function updateWorksheetList(id) {
+    let idIndex = selectedWorksheets.indexOf(id);
     if (idIndex < 0) {
-      selectedDatasources.push(id);
+      selectedWorksheets.push(id);
     } else {
-      selectedDatasources.splice(idIndex, 1);
+      selectedWorksheets.splice(idIndex, 1);
     }
   }
 
@@ -82,7 +82,7 @@
       id: datasource.id,
       value: datasource.name,
       checked: isActive,
-      click: function() { updateDatasourceList(datasource.id) }
+      click: function() { updateWorksheetList(datasource.id) }
     }).appendTo(containerDiv);
 
     $('<label />', {
@@ -99,7 +99,7 @@
    */
   function closeDialog() {
     let currentSettings = tableau.extensions.settings.getAll();
-    tableau.extensions.settings.set(datasourcesSettingsKey, JSON.stringify(selectedDatasources));
+    tableau.extensions.settings.set(WorksheetSettingsKey, JSON.stringify(selectedWorksheets));
 
     tableau.extensions.settings.saveAsync().then((newSavedSettings) => {
       tableau.extensions.ui.closeDialog($('#interval').val());
