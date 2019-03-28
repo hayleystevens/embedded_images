@@ -71,6 +71,8 @@
   /**
    * UI helper that adds a checkbox item to the UI for a datasource.
    */
+
+   
   function addWorksheetItemToUI(worksheet, isActive) {
     let containerDiv = $('<div />');
 
@@ -97,7 +99,7 @@
     tableau.extensions.settings.set(WorksheetSettingsKey, JSON.stringify(selectedWorksheets));
 
     tableau.extensions.settings.saveAsync().then((newSavedSettings) => {
-      tableau.extensions.ui.closeDialog($('#interval').val());
+      tableau.extensions.ui.closeDialog($("").val());
     });
   }
 })();
