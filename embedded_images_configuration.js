@@ -17,14 +17,14 @@
     tableau.extensions.initializeDialogAsync().then(function (openPayload) {
       $('#closeButton').click(closeDialog);
 
-      let dashboard = tableau.extensions.dashboardContent.dashboard ;
+      let worksheets = tableau.extensions.dashboardContent.dashboard.worksheets ;
       let visibleWorksheets = [];
       selectedWorksheets = parseSettingsForActiveWorksheets();
 
       // Loop through datasources in this sheet and create a checkbox UI 
       // element for each one.  The existing settings are used to 
       // determine whether a datasource is checked by default or not.
-      dashboard.forEach(function (worksheet) {
+      worksheets.forEach(function (worksheet) {
             let isActive = (selectedWorksheets.indexOf(worksheet.id) >= 0);
 
             if (visibleWorksheets.indexOf(worksheet.id) < 0) {
