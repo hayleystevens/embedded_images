@@ -18,7 +18,6 @@
       // The openPayload sent from the parent extension in this sample is the 
       // default time interval for the refreshes.  This could alternatively be stored
       // in settings, but is used in this sample to demonstrate open and close payloads.
-      $('#interval').val(openPayload);
       $('#closeButton').click(closeDialog);
 
       let worksheets = tableau.extensions.dashboardContent.dashboard.worksheets ;
