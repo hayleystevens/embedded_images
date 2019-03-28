@@ -75,25 +75,6 @@
   }
 
   /**
-   * This function sets up a JavaScript interval based on the time interval selected
-   * by the user.  This interval will refresh all selected datasources.
-   */
-  function setupRefreshInterval(interval) {
-    refreshInterval = setInterval(function() { 
-      let dashboard = tableau.extensions.dashboardContent.dashboard;
-      dashboard.worksheets.forEach(function (worksheet) {
-        worksheet.getDataSourcesAsync().then(function (datasources) {
-          datasources.forEach(function (datasource) {
-             if (activeWorksheetsIdList.indexOf(worksheet.id) >= 0) {
-               datasource.refreshAsync();
-             }
-          });
-        });
-      });
-    }, interval*60*1000);
-  }
-
-  /**
    * Helper that is called to set state anytime the settings are changed.
    */
   function updateExtensionBasedOnSettings(settings) {
