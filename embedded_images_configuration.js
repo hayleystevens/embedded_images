@@ -21,7 +21,7 @@
       $('#interval').val(openPayload);
       $('#closeButton').click(closeDialog);
 
-      const worksheets = tableau.extensions.dashboardContent.dashboard.worksheets ;
+      let worksheets = tableau.extensions.dashboardContent.dashboard.worksheets ;
       let visibleWorksheets = [];
       selectedWorksheets = parseSettingsForActiveWorksheets();
 
@@ -29,6 +29,7 @@
       // element for each one.  The existing settings are used to 
       // determine whether a datasource is checked by default or not.
       worksheets.forEach(function (worksheet) {
+        worksheet.forEach(function (worksheet) {
             let isActive = (selectedWorksheets.indexOf(worksheet.id) >= 0);
 
             if (visibleWorksheets.indexOf(worksheet.id) < 0) {
@@ -37,6 +38,7 @@
             }
           });
         });
+      });
       });
 
   /**
