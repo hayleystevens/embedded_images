@@ -99,3 +99,8 @@
     });
   }
 })();
+
+
+//Need to select worksheet name
+//Then need to select field name. 
+//Then need to read the worksheet name & field name back to main JS/HTML
