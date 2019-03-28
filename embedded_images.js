@@ -15,6 +15,8 @@
 
 // Wrap everything in an anonymous function to avoid polluting the global namespace
 (function () {
+  const defaultIntervalInMin = '5';
+  let refreshInterval;
   let activeWorksheetsIdList = [];
 
   $(document).ready(function () {
@@ -43,8 +45,14 @@
      * This is the API call that actually displays the popup extension to the user.  The
      * popup is always a modal dialog.  The only required parameter is the URL of the popup,  
      * which must be the same domain, port, and scheme as the parent extension.
+     * 
+     * The developer can optionally control the initial size of the extension by passing in 
+     * an object with height and width properties.  The developer can also pass a string as the
+     * 'initial' payload to the popup extension.  This payload is made available immediately to 
+     * the popup extension.  In this example, the value '5' is passed, which will serve as the
+     * default interval of refresh.
      */
-    tableau.extensions.ui.displayDialogAsync(popupUrl, { height: 500, width: 200 }).then((closePayload) => {
+    tableau.extensions.ui.displayDialogAsync(popupUrl, defaultIntervalInMin, { height: 500, width: 500 }).then((closePayload) => {
       // The promise is resolved when the dialog has been expectedly closed, meaning that
       // the popup extension has called tableau.extensions.ui.closeDialog.
       $('#inactive').hide();
