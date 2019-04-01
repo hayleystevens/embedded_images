@@ -29,6 +29,7 @@
       // element for each on e.  The existing settings are used to 
       // determine whether a datasource is checked by default or not.
       worksheets.forEach(function (worksheet) {
+        worksheet.tableau.extensions.settings.set('sheet', worksheetName);
             let isActive = (selectedWorksheets.indexOf(worksheet.id) >= 0);
 
             if (visibleWorksheets.indexOf(worksheet.id) < 0) {
@@ -47,7 +48,7 @@
    */
   function parseSettingsForActiveWorksheets() {
     let activeWorksheetsIdList = [];
-    let settings = tableau.extensions.settings.set('sheet', worksheetName);
+    let settings = tableau.extensions.settings.getAll();
     if (settings.selectedWorksheets) {
       activeWorksheetsIdList = JSON.parse(settings.selectedWorksheets);
     }
