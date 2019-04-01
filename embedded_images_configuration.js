@@ -17,12 +17,16 @@
     tableau.extensions.initializeDialogAsync().then(function (openPayload) {
       $('#closeButton').click(closeDialog);
 
-      let worksheets = tableau.extensions.dashboardContent.dashboard.worksheets ;
+      const dashboard_name=tableau.extensions.dashboardContent.dashboard.name;
+      $('#dashboard_name').text(dashboard_name)
+      
+      const worksheets = tableau.extensions.dashboardContent.dashboard.worksheets ;
       let visibleWorksheets = [];
       selectedWorksheets = parseSettingsForActiveWorksheets();
 
-      // Loop through datasources in this sheet and create a checkbox UI 
-      // element for each one.  The existing settings are used to 
+      // I WOULD LIKE.... Loop through the worksheets in this dashboard and create a single select drop down.
+         //Loop through datasources in this sheet and create a checkbox UI 
+      // element for each on e.  The existing settings are used to 
       // determine whether a datasource is checked by default or not.
       worksheets.forEach(function (worksheet) {
             let isActive = (selectedWorksheets.indexOf(worksheet.id) >= 0);
@@ -43,7 +47,7 @@
    */
   function parseSettingsForActiveWorksheets() {
     let activeWorksheetsIdList = [];
-    let settings = tableau.extensions.settings.getAll();
+    let settings = tableau.extensions.settings.set('sheet', worksheetName);
     if (settings.selectedWorksheets) {
       activeWorksheetsIdList = JSON.parse(settings.selectedWorksheets);
     }
