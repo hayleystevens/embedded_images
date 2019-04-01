@@ -14,10 +14,8 @@
     // This has no affect on the development of the extension but is used internally.
     tableau.extensions.initializeDialogAsync().then(function (openPayload) {
       $('#closeButton').click(closeDialog);
-      showChooseSheetDialog();
 
-      function showChooseSheetDialog () {
-        // Clear out the existing list of sheets
+         // Clear out the existing list of sheets
         $('#choose_sheet_buttons').empty();
     
         // Set the dashboard's name in the title
@@ -51,8 +49,7 @@
     
         // Show the dialog
         $('#choose_sheet_dialog').modal('toggle');
-      }
-    
+          
       function createButton (buttonTitle) {
         const button =
         $(`<button type='button' class='btn btn-default btn-block'>
