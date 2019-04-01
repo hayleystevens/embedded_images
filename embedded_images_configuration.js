@@ -73,4 +73,4 @@
       tableau.extensions.ui.closeDialog($("").val());
     });
   }
-}}})
+})();
